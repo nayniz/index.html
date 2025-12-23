@@ -20,18 +20,23 @@ body{
 
 header{
   background:linear-gradient(135deg,var(--rosa),#f5c6d6);
-  padding:30px;
+  padding:35px;
   text-align:center;
 }
 
 .logo{
-  font-size:32px;
+  font-size:36px;
   font-weight:bold;
   letter-spacing:2px;
 }
 
 section{
   padding:25px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
 }
 
 .produtos{
@@ -42,7 +47,7 @@ section{
 
 .card{
   background:white;
-  border-radius:18px;
+  border-radius:20px;
   padding:15px;
   box-shadow:0 8px 20px rgba(0,0,0,.1);
   text-align:center;
@@ -50,7 +55,7 @@ section{
 
 .card img{
   width:100%;
-  border-radius:14px;
+  border-radius:15px;
 }
 
 button{
@@ -64,16 +69,25 @@ button{
   font-size:15px;
 }
 
-#carrinho{
+input, textarea{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:5px;
+}
+
+#box{
   background:white;
-  border-radius:18px;
+  border-radius:20px;
   padding:20px;
   box-shadow:0 8px 20px rgba(0,0,0,.1);
 }
 
 footer{
   text-align:center;
-  padding:15px;
+  padding:20px;
+  font-size:14px;
 }
 </style>
 </head>
@@ -144,12 +158,39 @@ footer{
 
 <section>
 <h2>🛒 Carrinho</h2>
-<div id="carrinho"></div>
+<div id="box"></div>
 <button onclick="finalizar()">Finalizar pedido no WhatsApp</button>
 </section>
 
+<section>
+<h2>🧶 Encomendas Personalizadas</h2>
+
+<div id="box">
+
+<label>Produto desejado:</label>
+<input id="produto" placeholder="Ex: Tapete, Sousplat, Bolsa">
+
+<label>Cores:</label>
+<input id="cores" placeholder="Ex: Rosa, bege, verde">
+
+<label>Modelo:</label>
+<input id="modelo" placeholder="Ex: Redondo, oval">
+
+<label>Tamanho:</label>
+<input id="tamanho" placeholder="Ex: Pequeno, médio, grande">
+
+<label>Observações:</label>
+<textarea id="obs" rows="4" placeholder="Detalhes do pedido"></textarea>
+
+<button onclick="encomenda()">Enviar encomenda pelo WhatsApp</button>
+
+</div>
+</section>
+
 <footer>
-<p>📲 Encomendas artesanais • Nayni Crochês</p>
+<p>📲 Encomendas pelo WhatsApp<br>
+<strong>(34) 99910-5529</strong></p>
+<p>© Nayni Crochês</p>
 </footer>
 
 <script>
@@ -167,8 +208,8 @@ function atualizar(){
     html+=`<p>${i.nome} – R$ ${i.preco}</p>`;
     total+=i.preco;
   });
-  html+=`<strong>Total: R$ ${total}</strong>`;
-  document.getElementById("carrinho").innerHTML=html;
+  html+=`<hr><strong>Total: R$ ${total}</strong>`;
+  document.getElementById("box").innerHTML=html;
 }
 
 function finalizar(){
@@ -179,6 +220,16 @@ function finalizar(){
     total+=i.preco;
   });
   texto+=`%0ATotal: R$ ${total}`;
+  window.open("https://wa.me/5534999105529?text="+texto);
+}
+
+function encomenda(){
+  let texto="✨ Encomenda personalizada ✨%0A";
+  texto+="Produto: "+produto.value+"%0A";
+  texto+="Cores: "+cores.value+"%0A";
+  texto+="Modelo: "+modelo.value+"%0A";
+  texto+="Tamanho: "+tamanho.value+"%0A";
+  texto+="Observações: "+obs.value;
   window.open("https://wa.me/5534999105529?text="+texto);
 }
 </script>

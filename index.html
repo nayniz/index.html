@@ -1,0 +1,144 @@
+# index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nayni Crochês Artesanais</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fff7f3;
+  color: #4a2c2a;
+}
+header {
+  background: #f2b6c6;
+  padding: 20px;
+  text-align: center;
+}
+section {
+  padding: 20px;
+}
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+button {
+  background: #d96a8d;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#carrinho {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+footer {
+  background: #f2b6c6;
+  text-align: center;
+  padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Nayni Crochês Artesanais</h1>
+  <p>Peças feitas à mão com carinho 💕</p>
+</header>
+
+<section>
+<h2>🛍️ Produtos</h2>
+
+<div class="produtos">
+
+<div class="card">
+<img src="BEC91477-EEF4-4AE7-990B-12E585D6681F.jpeg">
+<h3>Tapetes de Crochê</h3>
+<p>R$ 60,00 unidade<br>Kit 2 tapetes: R$ 120,00</p>
+<button onclick="add('Tapete de Crochê',60)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="DDA5EC62-C3A2-45E0-9704-D24A3EF2D29F.jpeg">
+<h3>Sousplat</h3>
+<p>R$ 30,00 unidade</p>
+<button onclick="add('Sousplat',30)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="07A18264-0FF1-4943-ACA0-DA4E9A42CE7D.jpeg">
+<h3>Chaveiro de Crochê</h3>
+<p>R$ 10,00</p>
+<button onclick="add('Chaveiro de Crochê',10)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="7FC6DB0A-E61A-4630-80FD-DB5A16002B2A.jpeg">
+<h3>Bolsa de Fio de Malha</h3>
+<p>R$ 75,00</p>
+<button onclick="add('Bolsa de Fio de Malha',75)">Adicionar</button>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>🛒 Carrinho</h2>
+<div id="carrinho"></div>
+<button onclick="finalizar()">Finalizar pedido no WhatsApp</button>
+</section>
+
+<footer>
+<p>📲 Encomendas artesanais feitas com amor</p>
+</footer>
+
+<script>
+let carrinho = [];
+
+function add(nome, preco) {
+  carrinho.push({nome, preco});
+  atualizar();
+}
+
+function atualizar() {
+  let html = "";
+  let total = 0;
+  carrinho.forEach(item => {
+    html += `<p>${item.nome} - R$ ${item.preco}</p>`;
+    total += item.preco;
+  });
+  html += `<strong>Total: R$ ${total}</strong>`;
+  document.getElementById("carrinho").innerHTML = html;
+}
+
+function finalizar() {
+  let texto = "Olá! Gostaria de fazer um pedido:%0A";
+  let total = 0;
+  carrinho.forEach(item => {
+    texto += `- ${item.nome} (R$ ${item.preco})%0A`;
+    total += item.preco;
+  });
+  texto += `%0ATotal: R$ ${total}`;
+  window.open("https://wa.me/5534999105529?text=" + texto);
+}
+</script>
+
+</body>
+</html>
